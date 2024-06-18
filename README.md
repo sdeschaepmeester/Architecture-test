@@ -17,8 +17,11 @@ Cloudflare est un outil permettant d'héberger le site.
 
 ### Déploiement avec Cloudflare pages
 
+**Configuration**
 1. Build le site avec la commande ``npm run build``.
-
+2. Aller sur le site de cloudflare, sélectionner **Account Home**, puis **Workers & Pages**
+3. Create application > Pages > Connect to Git
+4. Sélectionner le projet Git et cliquer sur Terminé.
 
 ## Jenkins
 

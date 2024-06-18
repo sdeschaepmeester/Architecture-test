@@ -11,7 +11,7 @@ function App() {
           Hello, world !
         </p>
         <p>
-          Ce projet a pour but de montrer le fonctionnement de cloudflare et Jenkins.
+          Ce projet a pour but de montrer le fonctionnement de Cloudflare.
         </p>
       </header>
     </div>
