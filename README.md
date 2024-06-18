@@ -13,7 +13,12 @@ Ce projet est une application très simple en javascript (type helloworld).
 
 ## Cloudflare
 
-Cloudflare est un outil 
+Cloudflare est un outil permettant d'héberger le site.
+
+### Déploiement avec Cloudflare pages
+
+1. Build le site avec la commande ``npm run build``.
+
 
 ## Jenkins
 
