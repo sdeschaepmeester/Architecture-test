@@ -1,13 +1,12 @@
 pipeline {
     agent any
     tools {
-        nodejs 'NodeJS-18' // Utilise le nom de ton installation NodeJS
+        nodejs 'NodeJS-18' // Installation NodeJS
     }
     environment {
         GIT_CREDENTIALS = credentials('github-credentials') // ID credential GitHub
         CLOUDFLARE_TOKEN = credentials('cloudflare-token') // Token Cloudflare
-        ACCOUNT_ID = '299bc3f0f3a022ec1d5d73c3949dd268' // Remplace par ton Account ID Cloudflare
-        PROJECT_NAME = 'architecture-test' // Remplace par le nom de ton projet Cloudflare Pages
+        CLOUDFLARE_DEPLOY_HOOK_URL = 'https://deploy.example.com/deploy-hook-url' // Remplace par ton URL de Deploy Hook
     }
     stages {
         stage('Checkout') {
@@ -29,12 +28,12 @@ pipeline {
         stage('Deploy') {
             steps {
                 // Commandes pour déployer vers Cloudflare Pages
-                sh '''
-                curl -X POST "https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/pages/projects/${PROJECT_NAME}/direct_upload" \
-                     -H "Authorization: Bearer ${CLOUDFLARE_TOKEN}" \
-                     -F "manifest=@manifest.json" \
-                     -F "upload=@build.tar.gz"
-                '''
+                script {
+                    def response = sh(script: "curl -X POST ${CLOUDFLARE_DEPLOY_HOOK_URL} \
+                                -H 'Authorization: Bearer ${CLOUDFLARE_TOKEN}' \
+                                -F 'content=@build.tar.gz'", returnStdout: true)
+                    echo "Response from Cloudflare Deploy Hook: ${response}"
+                }
             }
         }
     }
