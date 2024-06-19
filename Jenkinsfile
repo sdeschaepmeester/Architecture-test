@@ -1,12 +1,15 @@
 pipeline {
     agent any
     tools {
-        nodejs 'NodeJS-18' // Nom de l'installation NodeJS dans Jenkins
+        nodejs 'NodeJS-18' //! Instance jenkins
+    }
+    environment {
+        GIT_CREDENTIALS = credentials('github-credentials') //! Id credential github
     }
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/ton_nom_utilisateur/ton_projet.git'
+                git branch: 'main', url: 'https://github.com/sdeschaepmeester/Architecture-test.git', credentialsId: 'github-credentials'
             }
         }
         stage('Install Dependencies') {
@@ -21,7 +24,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                // Déployer les fichiers buildés
+                // Commandes pour déployer, ex. vers S3 ou FTP
                 sh '''
                 aws s3 sync build/ s3://ton-bucket-s3/ --delete
                 '''
