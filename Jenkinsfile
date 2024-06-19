@@ -23,6 +23,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'npm run build'
+                sh 'tar -czf build.tar.gz -C build .'
             }
         }
         stage('Deploy') {
