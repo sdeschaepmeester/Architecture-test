@@ -6,7 +6,7 @@ pipeline {
     environment {
         GIT_CREDENTIALS = credentials('github-credentials') // ID credential GitHub
         CLOUDFLARE_TOKEN = credentials('cloudflare-token') // Token Cloudflare
-        CLOUDFLARE_DEPLOY_HOOK_URL = 'https://deploy.example.com/deploy-hook-url' // Remplace par ton URL de Deploy Hook
+        CLOUDFLARE_DEPLOY_HOOK_URL = 'https://api.cloudflare.com/client/v4/pages/webhooks/deploy_hooks/40fce885-c0ba-4390-a842-3a8c4cf5ac42' // URL de Deploy Hook
     }
     stages {
         stage('Checkout') {
