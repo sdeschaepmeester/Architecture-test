@@ -5,6 +5,9 @@ pipeline {
     }
     environment {
         GIT_CREDENTIALS = credentials('github-credentials') //! Id credential github
+        CLOUDFLARE_TOKEN = credentials('cloudflare-token') //! Token Cloudflare
+        ACCOUNT_ID = '299bc3f0f3a022ec1d5d73c3949dd268'
+        PROJECT_NAME = 'architecture-test'
     }
     stages {
         stage('Checkout') {
@@ -26,7 +29,10 @@ pipeline {
             steps {
                 // Commandes pour déployer, ex. vers S3 ou FTP
                 sh '''
-                aws s3 sync build/ s3://ton-bucket-s3/ --delete
+                curl -X POST "https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/pages/projects/${PROJECT_NAME}/direct_upload" \
+                     -H "Authorization: Bearer ${CLOUDFLARE_TOKEN}" \
+                     -F "manifest=@manifest.json" \
+                     -F "upload=@build.tar.gz"
                 '''
             }
         }
