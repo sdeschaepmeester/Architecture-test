@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools {
-        nodejs 'ReactJS-Build-Deploy' // Remplace par le nom de l'installation NodeJS dans Jenkins
+        nodejs 'NodeJS-18' // Nom de l'installation NodeJS dans Jenkins
     }
     stages {
         stage('Checkout') {
