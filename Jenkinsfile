@@ -28,7 +28,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                // Commandes pour déployer, ex. vers S3 ou FTP
+                // Commandes pour déployer, ex. vers Cloudflare Pages
                 sh '''
                 curl -X POST "https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/pages/projects/${PROJECT_NAME}/direct_upload" \
                      -H "Authorization: Bearer ${CLOUDFLARE_TOKEN}" \
