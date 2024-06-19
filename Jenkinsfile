@@ -1,13 +1,13 @@
 pipeline {
     agent any
     tools {
-        nodejs 'NodeJS-18' //! Instance jenkins
+        nodejs 'NodeJS-18' // Utilise le nom de ton installation NodeJS
     }
     environment {
-        GIT_CREDENTIALS = credentials('github-credentials') //! Id credential github
-        CLOUDFLARE_TOKEN = credentials('cloudflare-token') //! Token Cloudflare
-        ACCOUNT_ID = '299bc3f0f3a022ec1d5d73c3949dd268'
-        PROJECT_NAME = 'architecture-test'
+        GIT_CREDENTIALS = credentials('github-credentials') // ID credential GitHub
+        CLOUDFLARE_TOKEN = credentials('cloudflare-token') // Token Cloudflare
+        ACCOUNT_ID = '299bc3f0f3a022ec1d5d73c3949dd268' // Remplace par ton Account ID Cloudflare
+        PROJECT_NAME = 'architecture-test' // Remplace par le nom de ton projet Cloudflare Pages
     }
     stages {
         stage('Checkout') {
@@ -28,7 +28,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                // Commandes pour déployer, ex. vers Cloudflare Pages
+                // Commandes pour déployer vers Cloudflare Pages
                 sh '''
                 curl -X POST "https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/pages/projects/${PROJECT_NAME}/direct_upload" \
                      -H "Authorization: Bearer ${CLOUDFLARE_TOKEN}" \
